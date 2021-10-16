@@ -48,7 +48,7 @@ public class NumberBlock : MonoBehaviour
 
   
 
-    // Start is called before the first frame update
+    // Start is called before the first frame updat
     void Start()
     {
         sprite = GetComponent<SpriteRenderer>();
