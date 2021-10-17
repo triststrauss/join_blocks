@@ -46,34 +46,36 @@ public class NumberBlock : MonoBehaviour
 
     public SpaceBlock targetSpaceBlock;
 
-  
 
-    // Start is called before the first frame updat
-    void Start()
+
+    void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
-        
-        queueFirstPosition = new Vector2(1,-4.76f);
+
+        queueFirstPosition = new Vector2(1, -4.76f);
         Text[] text = GetComponentsInChildren<Text>();
-        foreach(Text t in text)
+        foreach (Text t in text)
         {
-            if(t.name.Equals("NumberText"))
+            if (t.name.Equals("NumberText"))
             {
                 numberText = t;
             }
-            else if(t.name.Equals("DebugText"))
+            else if (t.name.Equals("DebugText"))
             {
                 debugText = t;
             }
         }
 
-        this.number = numbers[UnityEngine.Random.Range(0, numbers.Length)];
+        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
+
+       
+    }
+
+    // Start is called before the first frame updat
+    void Start()
+    {
         numberText.text = "" + number;
         setColor();
-
-        scoreManager = GameObject.FindObjectOfType<ScoreManager>();
-        
-
     }
 
     public void moveToAvailableSpace(SpaceBlock spaceBlock)
@@ -82,6 +84,19 @@ public class NumberBlock : MonoBehaviour
         parentSpaceBlock = spaceBlock;
         spaceBlock.setNumberBlock(this);
         setCurrentState(STATE.MOVE_TO_AVAILABLE_SPACE);
+    }
+
+
+    public void setNumber(int number)
+    {
+        this.number = number;
+        
+    }
+
+    public void setNumber()
+    {
+        this.number = numbers[UnityEngine.Random.Range(0, numbers.Length)];
+        setNumber(number);
     }
 
     public void setColor()
@@ -225,8 +240,6 @@ public class NumberBlock : MonoBehaviour
         currentState = stateToChange;
         if(debugText != null)
             debugText.text = currentState.ToString();
-
-        Debug.Log("<IQ> : " + currentState);
     }
 
 

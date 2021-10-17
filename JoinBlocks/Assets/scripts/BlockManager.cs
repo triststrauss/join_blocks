@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BlockManager : MonoBehaviour
 {
-
     public SpaceBlock spaceBlock;
     private Vector2 startPosition;
 
@@ -24,23 +23,23 @@ public class BlockManager : MonoBehaviour
     private bool isLastBlock = false;
 
 
-    void Start()
+    private void Awake()
     {
         blockSpriteRenderer = spaceBlock.GetComponent<SpriteRenderer>();
 
-        
+
 
         blockSize = blockSpriteRenderer.bounds.size.x;
 
-  
-        float overAllWidth = (blockSize * 5) + (offsetBetweenBlocks * 4);
-        float overAllHeight= (blockSize * 7) + (offsetBetweenBlocks * 6);
 
-        transform.position = new Vector3(0, Camera.main.orthographicSize - (overAllHeight/2f) - startOffsetY);
+        float overAllWidth = (blockSize * 5) + (offsetBetweenBlocks * 4);
+        float overAllHeight = (blockSize * 7) + (offsetBetweenBlocks * 6);
+
+        transform.position = new Vector3(0, Camera.main.orthographicSize - (overAllHeight / 2f) - startOffsetY);
 
 
         startPosition.x = -overAllWidth / 2f + (blockSize / 2f);
-        startPosition.y = transform.position.y + overAllHeight / 2f - blockSize/2f;
+        startPosition.y = transform.position.y + overAllHeight / 2f - blockSize / 2f;
         //startPosition.y = Camera.main.orthographicSize - (blockSize/2f) - startOffsetY;
 
 
@@ -55,18 +54,22 @@ public class BlockManager : MonoBehaviour
 
             for (int j = 0; j < 7; j++)
             {
-                float posX = startPosition.x + (i  * blockSize) + (i * offsetBetweenBlocks);
+                float posX = startPosition.x + (i * blockSize) + (i * offsetBetweenBlocks);
                 float posY = startPosition.y - (j * blockSize) - (j * offsetBetweenBlocks);
                 SpaceBlock gameObject = Instantiate(spaceBlock, new Vector3(posX, posY), Quaternion.identity);
                 if (prvCreatedSpaceBlock != null)
                     prvCreatedSpaceBlock.bottomSpaceBlock = gameObject;
-                prvCreatedSpaceBlock = gameObject;                
-                gameObject.name = i +"" + j;
+                prvCreatedSpaceBlock = gameObject;
+                gameObject.name = i + "" + j;
                 spaceBlocks[k] = gameObject;
                 k++;
             }
         }
+    }
 
+    void Start()
+    {
+        
     }
 
     void Update()
@@ -193,4 +196,5 @@ public class BlockManager : MonoBehaviour
 
 
     }
+
 }

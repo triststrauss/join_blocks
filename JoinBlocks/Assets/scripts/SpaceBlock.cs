@@ -21,6 +21,12 @@ public class SpaceBlock : MonoBehaviour
 
 
     // Start is called before the first frame update
+
+    void Awake()
+    {
+        
+    }
+
     void Start()
     {
         columnNumber = Int16.Parse(name.Substring(0, 1));

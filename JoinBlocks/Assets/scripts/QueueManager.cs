@@ -16,11 +16,17 @@ public class QueueManager : MonoBehaviour
 
     public float offsetBetweenTwoNumberBlocks;
 
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         generateNumberBlock();
         generateNumberBlock();
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
     }
 
     // Update is called once per frame
@@ -65,6 +71,7 @@ public class QueueManager : MonoBehaviour
         secondPosition.x = transform.position.x + offsetBetweenTwoNumberBlocks;
         secondInQueueNumberBlock = Instantiate(numberBlock, secondPosition, Quaternion.identity);
         secondInQueueNumberBlock.setCurrentState(NumberBlock.STATE.QUEUE_TWO);
+        secondInQueueNumberBlock.setNumber();
         checkAndMoveToFirstPositionInQueue(secondInQueueNumberBlock);
 
     }
@@ -87,5 +94,11 @@ public class QueueManager : MonoBehaviour
             block.setCurrentState(NumberBlock.STATE.QUEUE_MOVEMENT);
             firstInQueueNumberBlock = block;
         }
+    }
+
+
+    public static void RestoreGame()
+    {
+       
     }
 }

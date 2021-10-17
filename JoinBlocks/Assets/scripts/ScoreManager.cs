@@ -9,10 +9,16 @@ public class ScoreManager : MonoBehaviour
 
     Text scoreText;
     int score;
+
+    void Awake()
+    {
+        scoreText = GetComponentInChildren<Text>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        scoreText = GetComponentInChildren<Text>();
+        
     }
 
     public void Update()

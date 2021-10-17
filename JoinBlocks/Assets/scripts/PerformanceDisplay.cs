@@ -8,10 +8,16 @@ public class PerformanceDisplay : MonoBehaviour
     Text performanceText;
     float deltaTime;
 
+
+    void Awake()
+    {
+        performanceText = GetComponentInChildren<Text>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        performanceText = GetComponentInChildren<Text>();
+        
     }
 
     // Update is called once per frame

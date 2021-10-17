@@ -7,18 +7,24 @@ public class CameraScript : MonoBehaviour
 
     // Start is called before the first frame update
     public BlockManager blockManager;
+    public SaveGameSystem saveGameSystem;
 
     void Start()
     {
+        d("START");
+        //Application.targetFrameRate = 60;
+    }
+
+
+    private void Awake()
+    {
+        d("AWAKE");
         Application.targetFrameRate = 60;
 
         float orthoSize = (float)(7.2 * Screen.height / Screen.width * 0.5f);
 
         Camera.main.orthographicSize = orthoSize;
-
-        //Application.targetFrameRate = 60;
     }
-
 
     void Update()
     {
@@ -33,8 +39,9 @@ public class CameraScript : MonoBehaviour
 
             if (hit.collider != null)
             {
-                Debug.Log(hit.collider.gameObject.name);
+                d(hit.collider.gameObject.name);
                 blockManager.OnTriggerFromPlayer(hit.collider.gameObject);
+                              
             }
 
 
@@ -45,12 +52,13 @@ public class CameraScript : MonoBehaviour
 
         if ((Input.GetKeyDown(KeyCode.Escape)))
         {
+            saveGameSystem.Save();
             Application.Quit();
         }
     }
 
 
-    public void d(string str)
+    public static void d(string str)
     {
         Debug.Log("<IQ> : " + str);
 
